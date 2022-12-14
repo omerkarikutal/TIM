@@ -1,6 +1,7 @@
 ﻿using Core.Model;
 using DataAccess.Abstract;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,12 @@ namespace Business.Cqrs.Queries.BookTransaction.Search
     public class SearchBookTransactionHandler : IRequestHandler<SearchBookTransactionRequest, BaseResponse<List<SearchBookTransactionResponse>>>
     {
         private readonly IBookTransactionRepository _repository;
-        public SearchBookTransactionHandler(IBookTransactionRepository repository)
+        private readonly IConfiguration _configuration;
+        public SearchBookTransactionHandler(IBookTransactionRepository repository,
+            IConfiguration configuration)
         {
             _repository = repository;
+            _configuration = configuration;
         }
         public async Task<BaseResponse<List<SearchBookTransactionResponse>>> Handle(SearchBookTransactionRequest request, CancellationToken cancellationToken)
         {
@@ -53,7 +57,8 @@ namespace Business.Cqrs.Queries.BookTransaction.Search
             double total = 0;
             while (value > 0)
             {
-                total += list[value] * 0.20;
+                //appsettingsden getirilecek
+                total += list[value] * _configuration.GetValue<double>("PenaltyCalculateValue");
                 value--;
             }
             return total;

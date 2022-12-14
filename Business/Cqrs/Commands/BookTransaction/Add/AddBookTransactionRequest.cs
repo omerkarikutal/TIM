@@ -12,6 +12,5 @@ namespace Business.Cqrs.Commands.BookTransaction.Add
     {
         public int BookId { get; set; }
         public int MemberId { get; set; }
-        public DateTime ReturnDate { get; set; }
     }
 }
