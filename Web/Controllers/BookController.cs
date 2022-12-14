@@ -31,5 +31,10 @@ namespace Web.Controllers
         {
             return Json(await _service.Post<BaseResponse<BookTransaction>>($"booktransaction", request));
         }
+        [HttpGet]
+        public async Task<IActionResult> MemberList()
+        {
+            return Json(await _service.Get<BaseResponse<List<dynamic>>>($"member"));
+        }
     }
 }

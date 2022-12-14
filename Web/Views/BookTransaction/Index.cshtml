@@ -1,0 +1,27 @@
+﻿@section Scripts {
+    <script src="~/js/booktransaction.js"></script>
+}
+
+    <div class="row">
+        <div class="col-2">
+            <label>Başlangıç Tarihi</label>
+            <input type="date" id="firstDate" class="form-control" />
+        </div>
+        <div class="col-2">
+            <label>Bitiş Tarihi</label>
+            <input type="date" id="secondDate" class="form-control" />
+        </div>
+        <div class="col-2">
+            <button onclick="SearchBookTransaction();">Ara</button>
+        </div>
+    </div>
+    <br />
+    <table class="table" id="bookTransactionList">
+        <thead>
+            <tr>
+                <th>Kitap Adı</th>
+                <th>Üye Adı</th>
+                <th>Veriliş Tarihi</th>
+            </tr>
+        </thead>
+    </table>

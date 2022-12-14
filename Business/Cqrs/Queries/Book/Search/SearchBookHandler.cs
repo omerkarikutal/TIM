@@ -26,7 +26,6 @@ namespace Business.Cqrs.Queries.Book.Search
             //mapster kullanılacak
             var obj = result.Data.Select(s => new SearchBookResponse
             {
-                Id = s.Id,
                 Author = s.Author,
                 Isbn = s.Isbn,
                 Name = s.Name

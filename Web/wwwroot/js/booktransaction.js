@@ -1,4 +1,22 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function SearchBookTransaction() {
+    var firstDate = $('#firstDate').val();
+    var secondDate = $('#secondDate').val();
 
-// Write your JavaScript code.
+    $.ajax({
+        url: "/booktransaction/search",
+        data: { firstDate, secondDate },
+        succes: function (data) {
+            CreateDataTable(data.Data);
+        }
+    });
+}
+function CreateDataTable(data) {
+    $('#bookTransactionList').DataTable({
+        data: data,
+        columns: [
+            { data: "book" },
+            { data: "author" },
+            { data: "date" }
+        ]
+    });
+}

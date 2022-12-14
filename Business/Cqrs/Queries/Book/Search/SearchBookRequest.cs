@@ -11,8 +11,8 @@ namespace Business.Cqrs.Queries.Book.Search
     public class SearchBookRequest : IRequest<BaseResponse<List<SearchBookResponse>>>
     {
         public string Author { get; set; }
-        public string Name { get; set; }
-        public string Isbn { get; set; }
+        public string? Name { get; set; }
+        public string? Isbn { get; set; }
 
     }
 }

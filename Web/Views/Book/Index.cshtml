@@ -2,20 +2,30 @@
     <script src="~/js/book.js"></script>
 }
 
-<div class="row">
-    <div class="col-2">
-        <label>Yazar</label>
-        <input type="text" id="author" class="form-control"/>
+    <div class="row">
+        <div class="col-2">
+            <label>Yazar</label>
+            <input type="text" id="author" class="form-control" />
+        </div>
+        <div class="col-2">
+            <label>Kitap Adı</label>
+            <input type="text" id="book" class="form-control" />
+        </div>
+        <div class="col-2">
+            <label>Isbn</label>
+            <input type="text" id="isbn" class="form-control" />
+        </div>
+        <div class="col-2">
+            <button onclick="SearchBook();">Ara</button>
+        </div>
     </div>
-    <div class="col-2">
-        <label>Kitap Adı</label>
-        <input type="text" id="book" class="form-control"/>
-    </div>
-    <div class="col-2">
-        <label>Isbn</label>
-        <input type="text" id="author" class="form-control"/>
-    </div>
-    <div class="col-2">
-        <button></button>
-    </div>
-</div>
+    <br />
+    <table class="table" id="bookList">
+        <thead>
+            <tr>
+                <th>Kitap Adı</th>
+                <th>Yazarı</th>
+                <th>Isbn</th>
+            </tr>
+        </thead>
+    </table>

@@ -19,11 +19,13 @@ namespace Business.Cqrs.Commands.BookTransaction.Add
         }
         public async Task<BaseResponse<Core.Entity.BookTransaction>> Handle(AddBookTransactionRequest request, CancellationToken cancellationToken)
         {
+            //mapster todo
             var model = new Core.Entity.BookTransaction
             {
                 MemberId = request.MemberId,
-                BookIsbn = request.BookId.ToString(),
-                ReturnDate = request.ReturnDate
+                BookIsbn = request.BookId,
+                ReturnDate = request.ReturnDate,
+                CreateDate = DateTime.Now
             };
 
             return await _repository.AddAsync(model);
