@@ -18,10 +18,17 @@ namespace Business.Cqrs.Queries.Book.Search
         }
         public async Task<BaseResponse<List<SearchBookResponse>>> Handle(SearchBookRequest request, CancellationToken cancellationToken)
         {
+            var today = DateTime.Now.Date;
+
+
+            //gönderilen form queryi deki parametlere göre filtrelenir
+            //booktransaction tablosunda bu 2 tarih arasında olmayan kitaplar alınır.
+            //return date tarihinde kitapların iade olduğu varsayılıyor.
             var result = await _repository.GetAllAsync(s =>
             (string.IsNullOrEmpty(request.Author) || s.Author.ToLower().Contains(request.Author.ToLower())) &&
             (string.IsNullOrEmpty(request.Name) || s.Name.ToLower().Contains(request.Name.ToLower())) &&
-            (string.IsNullOrEmpty(request.Isbn) || s.Name.ToLower().Contains(request.Isbn.ToLower())));
+            (string.IsNullOrEmpty(request.Isbn) || s.Name.ToLower().Contains(request.Isbn.ToLower())) &&
+            (!s.BookTransactions.Any(a => a.CreateDate.Date >= today && a.ReturnDate.Date <= today)));
 
             //mapster kullanılacak
             var obj = result.Data.Select(s => new SearchBookResponse

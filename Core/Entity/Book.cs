@@ -15,5 +15,6 @@ namespace Core.Entity
         public int Isbn { get; set; }
         public string Name { get; set; }
         public string Author { get; set; }
+        public virtual ICollection<BookTransaction> BookTransactions { get; set; }
     }
 }

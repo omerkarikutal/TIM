@@ -23,8 +23,8 @@ function CreateFormDataTable(data) {
 }
 function Add() {
     var mode = {
-        BookId = $('#book').val(),
-        MemberId = $('#member').val()
+        BookId: $('#book').val(),
+        MemberId: $('#member').val()
     };
 
     $.ajax({

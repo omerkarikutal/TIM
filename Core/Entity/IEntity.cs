@@ -8,7 +8,7 @@ namespace Core.Entity
 {
     public interface IEntity
     {
-        public DateTime? CreateDate { get; set; }
+        public DateTime CreateDate { get; set; }
         public bool IsActive { get; set; }
     }
 }
