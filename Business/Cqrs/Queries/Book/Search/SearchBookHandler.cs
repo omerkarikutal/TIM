@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using Core.Model;
+using DataAccess.Abstract;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,16 +9,30 @@ using System.Threading.Tasks;
 
 namespace Business.Cqrs.Queries.Book.Search
 {
-    public class SearchBookHandler : IRequestHandler<SearchBookRequest, SearchBookResponse>
+    public class SearchBookHandler : IRequestHandler<SearchBookRequest, BaseResponse<List<SearchBookResponse>>>
     {
         private readonly IBookRepository _repository;
         public SearchBookHandler(IBookRepository repository)
         {
             _repository = repository;
         }
-        public async Task<SearchBookResponse> Handle(SearchBookRequest request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<List<SearchBookResponse>>> Handle(SearchBookRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var result = await _repository.GetAllAsync(s =>
+            (string.IsNullOrEmpty(request.Author) || s.Author.ToLower().Contains(request.Author.ToLower())) &&
+            (string.IsNullOrEmpty(request.Name) || s.Name.ToLower().Contains(request.Name.ToLower())) &&
+            (string.IsNullOrEmpty(request.Isbn) || s.Name.ToLower().Contains(request.Isbn.ToLower())));
+
+            //mapster kullanılacak
+            var obj = result.Data.Select(s => new SearchBookResponse
+            {
+                Id = s.Id,
+                Author = s.Author,
+                Isbn = s.Isbn,
+                Name = s.Name
+            }).ToList();
+
+            return new BaseResponse<List<SearchBookResponse>>().Success(obj);
         }
     }
 }

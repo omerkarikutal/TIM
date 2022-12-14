@@ -8,6 +8,8 @@ namespace Business.Cqrs.Queries.BookTransaction.Search
 {
     public class SearchBookTransactionResponse
     {
-        public DateTime Date { get; set; }
+        public string Member { get; set; }
+        public string Book { get; set; }
+        public DateTime CreateDate { get; set; }
     }
 }

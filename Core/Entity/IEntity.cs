@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Core.Entity
 {
-    public class Member: BaseEntity
+    public interface IEntity
     {
-        public string Name { get; set; }
-        public string Surname { get; set; }
+        public int Id { get; set; }
+        public DateTime? CreateDate { get; set; }
+        public bool IsActive { get; set; }
     }
 }
