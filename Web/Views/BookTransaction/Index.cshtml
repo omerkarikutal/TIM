@@ -3,16 +3,17 @@
 }
 
     <div class="row">
-        <div class="col-2">
+        <div class="col-4">
             <label>Başlangıç Tarihi</label>
-            <input type="date" id="firstDate" class="form-control" />
+            <input type="date" id="firstDate" class="form-control" value="@DateTime.Now.AddDays(-30).ToString("yyyy-mm-dd")" />
         </div>
-        <div class="col-2">
+        <div class="col-4">
             <label>Bitiş Tarihi</label>
-            <input type="date" id="secondDate" class="form-control" />
+            <input type="date" id="secondDate" class="form-control" value="@DateTime.Now.ToString("yyyy-mm-dd")" />
         </div>
-        <div class="col-2">
-            <button onclick="SearchBookTransaction();">Ara</button>
+        <div class="col-4">
+            <label>Filtrele</label><br />
+            <button class="btn btn-success" onclick="SearchBookTransaction();">Ara</button>
         </div>
     </div>
     <br />
@@ -22,6 +23,8 @@
                 <th>Kitap Adı</th>
                 <th>Üye Adı</th>
                 <th>Veriliş Tarihi</th>
+                <th>İade Tarihi</th>
+                <th>Ceza Tutarı</th>
             </tr>
         </thead>
     </table>

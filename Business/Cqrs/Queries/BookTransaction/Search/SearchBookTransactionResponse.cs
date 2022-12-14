@@ -11,6 +11,7 @@ namespace Business.Cqrs.Queries.BookTransaction.Search
         public string Member { get; set; }
         public string Book { get; set; }
         public DateTime CreateDate { get; set; }
+        public DateTime ReturnDate { get; set; }
         public double Penalty { get; set; }
     }
 }

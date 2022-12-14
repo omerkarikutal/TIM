@@ -2,31 +2,50 @@
     <script src="~/js/book.js"></script>
 }
 
-<div class="row">
-    <div class="col-3">
-        <label>Yazar</label>
-        <input type="text" id="author" class="form-control" />
+    <div class="row">
+        <div class="col-3">
+            <label>Yazar</label>
+            <input type="text" id="author" class="form-control" />
+        </div>
+        <div class="col-3">
+            <label>Kitap Adı</label>
+            <input type="text" id="book" class="form-control" />
+        </div>
+        <div class="col-3">
+            <label>Isbn</label>
+            <input type="text" id="isbn" class="form-control" />
+        </div>
+        <div class="col-3">
+            <label>Filtrele</label>
+            <br />
+            <button class="btn btn-success" type="button" onclick="SearchBook();">Ara</button>
+        </div>
     </div>
-    <div class="col-3">
-        <label>Kitap Adı</label>
-        <input type="text" id="book" class="form-control" />
+    <br />
+    <table class="table" id="bookList">
+        <thead>
+            <tr>
+                <th>Kitap Adı</th>
+                <th>Yazarı</th>
+                <th>Isbn</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+    </table>
+    <div class="modal" tabindex="-1" role="dialog" id="memberModal">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content rounded">
+                <div class="modal-header">
+                    <h5 class="modal-title">Kayıt  </h5>
+                </div>
+                <br />
+                <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+                    <input type="hidden" id="isbn" name="isbn"/>
+                    <select class="form-control" id="memberDropdown">
+                    </select>
+                    <br />
+                    <button class="btn btn-success" onclick="SaveBookTransaction();">Kaydet</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-3">
-        <label>Isbn</label>
-        <input type="text" id="isbn" class="form-control" />
-    </div>
-    <div class="col-3">
-        <label></label>
-        <button type="button" onclick="SearchBook();">Ara</button>
-    </div>
-</div>
-<br />
-<table class="table" id="bookList">
-    <thead>
-        <tr>
-            <th>Kitap Adı</th>
-            <th>Yazarı</th>
-            <th>Isbn</th>
-        </tr>
-    </thead>
-</table>

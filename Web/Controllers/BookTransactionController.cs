@@ -18,7 +18,11 @@ namespace Web.Controllers
         }
         public async Task<IActionResult> Search(string first, string second)
         {
-            return Json(await _service.Get<BaseResponse<List<dynamic>>>($"booktransaction?FirstDate={first}&SecondDate={second}"));
+            var parseFirst = DateTime.Parse(first);
+            var parseSecond = DateTime.Parse(second);
+
+
+            return Json(await _service.Get<List<BookTransactionWebResponse>>($"booktransaction?FirstDate={first}&SecondDate={second}"));
         }
     }
 }

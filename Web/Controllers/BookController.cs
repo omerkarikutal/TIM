@@ -19,7 +19,7 @@ namespace Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Search(string bookName, string authorName, string isbn)
         {
-            var result = await _service.Get<BaseResponse<List<dynamic>>>(
+            var result = await _service.Get<List<BookWebResponse>>(
                 $"book?Author={authorName}&" +
                 $"Name={bookName}&" +
                 $"Isbn={isbn}");
@@ -27,14 +27,14 @@ namespace Web.Controllers
             return Json(result);
         }
         [HttpPost]
-        public async Task<IActionResult> Add(dynamic request)
+        public async Task<IActionResult> Add(AddBookTransactionWebRequest request)
         {
-            return Json(await _service.Post<BaseResponse<BookTransaction>>($"booktransaction", request));
+            return Json(await _service.Post<BookTransaction>($"booktransaction", request));
         }
         [HttpGet]
         public async Task<IActionResult> MemberList()
         {
-            return Json(await _service.Get<BaseResponse<List<dynamic>>>($"member"));
+            return Json(await _service.Get<List<MemberWebResponse>>($"member"));
         }
     }
 }

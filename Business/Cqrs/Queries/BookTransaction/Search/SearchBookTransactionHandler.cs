@@ -34,6 +34,7 @@ namespace Business.Cqrs.Queries.BookTransaction.Search
                 Book = s.Book.Name,
                 Member = $"{s.Member.Name} {s.Member.Surname}",
                 CreateDate = s.CreateDate,
+                ReturnDate = s.ReturnDate,
                 Penalty = s.ReturnDate < DateTime.Now ? CalculatePenalty(s.ReturnDate) : 0
             }).ToList();
 
