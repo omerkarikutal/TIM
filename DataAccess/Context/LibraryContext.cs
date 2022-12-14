@@ -20,7 +20,7 @@ namespace DataAccess.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //seed data eklenecek
+            //seed data eklenecek.
             base.OnModelCreating(modelBuilder);
         }
 
