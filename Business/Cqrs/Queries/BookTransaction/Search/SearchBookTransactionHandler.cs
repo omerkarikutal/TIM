@@ -22,8 +22,8 @@ namespace Business.Cqrs.Queries.BookTransaction.Search
         }
         public async Task<BaseResponse<List<SearchBookTransactionResponse>>> Handle(SearchBookTransactionRequest request, CancellationToken cancellationToken)
         {
-            var result = await _repository.GetAllAsync(s => s.ReturnDate.Date >= request.FirstDate
-            && s.ReturnDate.Date <= request.SecondDate, x => x.Member, x => x.Book);
+            var result = await _repository.GetAllAsync(s => (request.FirstDate.HasValue == false || s.ReturnDate.Date >= request.FirstDate)
+            && (request.SecondDate.HasValue == false || s.ReturnDate.Date <= request.SecondDate), x => x.Member, x => x.Book);
 
 
 
@@ -48,17 +48,19 @@ namespace Business.Cqrs.Queries.BookTransaction.Search
             {
                 total = Calculate(days);
             }
-            return total;
+            return Math.Round(total, 2);
         }
         private double Calculate(int value)
         {
+            var cr = _configuration.GetValue<float>("PenaltyCalculateValue");
+
             var list = FibonacciList(value);
 
             double total = 0;
             while (value > 0)
             {
                 //appsettingsden getirilecek
-                total += list[value] * _configuration.GetValue<double>("PenaltyCalculateValue");
+                total += list[value - 1] * cr;
                 value--;
             }
             return total;
@@ -93,7 +95,7 @@ namespace Business.Cqrs.Queries.BookTransaction.Search
             int total = 0;
             for (var i = returnDate; i <= DateTime.Now; i = i.AddDays(1))
             {
-                if (i.DayOfWeek != DayOfWeek.Saturday || i.DayOfWeek != DayOfWeek.Sunday)
+                if (i.DayOfWeek != DayOfWeek.Saturday && i.DayOfWeek != DayOfWeek.Sunday)
                     total++;
             }
             return total;
