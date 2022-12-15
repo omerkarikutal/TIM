@@ -65,6 +65,7 @@ function SaveBookTransaction() {
         succes: function (data) {
             if (data.status) {
                 SearchBook();
+                $('#memberModal').modal('hide');
             }
             else {
                 //alert çıkarılmalı
